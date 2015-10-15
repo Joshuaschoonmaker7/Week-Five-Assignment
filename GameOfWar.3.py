@@ -49,11 +49,13 @@ def playRound(PlayerAHand, PlayerBHand):
 	
 	if getRank(PlayerACard) == getRank(PlayerBCard):
 	
+		PlayerAHand.append(PlayerACard)
+		PlayerBHand.append(PlayerBCard)
 		WAR(PlayerAHand, PlayerBHand)
 	
 	else:
 		
-		if PlayerACard > PlayerBCard:
+		if getRank(PlayerACard) > getRank(PlayerBCard):
 			PlayerAHand.insert(0,PlayerACard)
 
 		else:
@@ -63,9 +65,38 @@ def playRound(PlayerAHand, PlayerBHand):
 
 
 def WAR(PlayerAHand, PlayerBHand):
+	
+	if len(PlayerAHand) and len(PlayerBHand) > 10:
+		
+		ExtraCardA = []
+		ExtraCardB = []
+		
+		for x in range(5):
+			
+			ExtraCardA.append(PlayerAHand.pop())
+			ExtraCardB.append(PlayerBHand.pop())
+		
+		if getRank(ExtraCardA[4]) == getRank(ExtraCardB[4]):
+			
+			return 
+			
+		else:
+			
+			if getRank(ExtraCardA[4]) > getRank(ExtraCardB[4]):
+				
+				PlayerAHand = ExtraCardA + ExtraCardB + PlayerAHand
+				
+			else:
+				
+				PlayerBHand = ExtraCardA + ExtraCardB +  PlayerBHand
+	
+		return PlayerAHand, PlayerBHand
+		
+	else:
+		
+		return
 
-	return PlayerAHand, PlayerBHand
-
+	# getRank Function
 	
 def getRank(anyCard):
 	return anyCard % 13

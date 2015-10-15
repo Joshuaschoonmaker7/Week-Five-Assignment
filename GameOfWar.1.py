@@ -53,7 +53,7 @@ def playRound(PlayerAHand, PlayerBHand):
 	
 	else:
 		
-		if PlayerACard > PlayerBCard:
+		if getRank(PlayerACard) > getRank(PlayerBCard):
 			PlayerAHand.insert(0,PlayerACard)
 			PlayerAHand.insert(0,PlayerBCard)
 
